@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initView() {
         //拼接抢红包服务的全名，便于查询服务是否开启
-        serviceName = getPackageName() + "/.service.EnvelopeService";
+        serviceName = getPackageName() + "/.service.WxEnvelopeService";
         //财神的动画
         mFrameAnim = (AnimationDrawable) getResources().getDrawable(R.drawable.animation_list);
         mActionEnable.setBackgroundDrawable(mFrameAnim);
