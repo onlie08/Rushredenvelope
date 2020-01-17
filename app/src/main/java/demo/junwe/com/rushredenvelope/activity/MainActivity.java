@@ -1,11 +1,17 @@
 package demo.junwe.com.rushredenvelope.activity;
 
+import android.app.Instrumentation;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.SystemClock;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,7 +22,7 @@ import demo.junwe.com.rushredenvelope.utils.SettingConfig;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    //QQ抢红包服务名称
+    //微信抢红包服务名称
     private String serviceName;
 
     private ImageView mActionEnable;
@@ -45,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initView() {
         //拼接抢红包服务的全名，便于查询服务是否开启
-        serviceName = getPackageName() + "/.service.WxEnvelopeService";
+        serviceName = getPackageName() + "/.service.InWxService";
         //财神的动画
         mFrameAnim = (AnimationDrawable) getResources().getDrawable(R.drawable.animation_list);
         mActionEnable.setBackgroundDrawable(mFrameAnim);
