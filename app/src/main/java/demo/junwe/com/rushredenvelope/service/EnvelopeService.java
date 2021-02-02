@@ -24,9 +24,9 @@ import demo.junwe.com.rushredenvelope.utils.listener.ScreenListener;
 
 /**
  * 描述:QQ抢红包服务
- * 作者:卜俊文
- * 邮箱:344176791@qq.com
- * 日期:2017/11/6 上午9:25
+ * 作者:曹海
+ * 邮箱:626704292@qq.com
+ * 日期:2019/11/6 上午9:25
  */
 public class EnvelopeService extends BaseAccessibilityService {
 
@@ -40,9 +40,9 @@ public class EnvelopeService extends BaseAccessibilityService {
 
     /**
      * 描述:所有事件响应的时候会回调
-     * 作者:卜俊文
-     * 邮箱:344176791@qq.com
-     * 日期:2017/11/6 上午9:26
+     * 作者:曹海
+     * 邮箱:626704292@qq.com
+     * 日期:2019/11/6 上午9:26
      */
     @Override
     public void onAccessibilityEvent(AccessibilityEvent event) {
@@ -90,9 +90,9 @@ public class EnvelopeService extends BaseAccessibilityService {
 
     /**
      * 描述:处理新消息
-     * 作者:卜俊文
-     * 邮箱:344176791@qq.com
-     * 日期:2017/11/3 下午11:21
+     * 作者:曹海
+     * 邮箱:626704292@qq.com
+     * 日期:2019/11/3 下午11:21
      */
     private void progressNewMessage(AccessibilityEvent event) {
 
@@ -112,9 +112,9 @@ public class EnvelopeService extends BaseAccessibilityService {
 
     /**
      * 描述:验证抢红包是否开启
-     * 作者:卜俊文
-     * 邮箱:344176791@qq.com
-     * 日期:2017/11/3 下午4:57
+     * 作者:曹海
+     * 邮箱:626704292@qq.com
+     * 日期:2019/11/3 下午4:57
      */
     private boolean invalidEnable() {
         return SettingConfig.getInstance().getReEnable();
@@ -123,9 +123,9 @@ public class EnvelopeService extends BaseAccessibilityService {
 
     /**
      * 描述:处理QQ状态栏
-     * 作者:卜俊文
-     * 邮箱:344176791@qq.com
-     * 日期:2017/11/1 下午1:49
+     * 作者:曹海
+     * 邮箱:626704292@qq.com
+     * 日期:2019/11/1 下午1:49
      */
     public void progressQQStatusBar(AccessibilityEvent event) {
         List<CharSequence> text = event.getText();
@@ -159,9 +159,9 @@ public class EnvelopeService extends BaseAccessibilityService {
 
     /**
      * 描述:处理QQ聊天红包
-     * 作者:卜俊文
-     * 邮箱:344176791@qq.com
-     * 日期:2017/11/1 下午1:56
+     * 作者:曹海
+     * 邮箱:626704292@qq.com
+     * 日期:2019/11/1 下午1:56
      */
     public void progressQQChat(AccessibilityEvent event) {
 
@@ -196,9 +196,9 @@ public class EnvelopeService extends BaseAccessibilityService {
 
     /**
      * 描述:验证是否现在是在聊天页面，可以进行抢红包处理
-     * 作者:卜俊文
-     * 邮箱:344176791@qq.com
-     * 日期:2017/11/3 上午11:52
+     * 作者:曹海
+     * 邮箱:626704292@qq.com
+     * 日期:2019/11/3 上午11:52
      *
      * @param event
      */
@@ -245,9 +245,9 @@ public class EnvelopeService extends BaseAccessibilityService {
 
     /**
      * 描述:处理普通红包
-     * 作者:卜俊文
-     * 邮箱:344176791@qq.com
-     * 日期:2017/11/1 下午5:02
+     * 作者:曹海
+     * 邮箱:626704292@qq.com
+     * 日期:2019/11/1 下午5:02
      */
     public void progressNormal(List<AccessibilityNodeInfo> passwordList) {
         if (passwordList != null && passwordList.size() > 0) {
@@ -271,9 +271,9 @@ public class EnvelopeService extends BaseAccessibilityService {
 
     /**
      * 描述:处理口令红包
-     * 作者:卜俊文
-     * 邮箱:344176791@qq.com
-     * 日期:2017/11/1 下午4:58
+     * 作者:曹海
+     * 邮箱:626704292@qq.com
+     * 日期:2019/11/1 下午4:58
      *
      * @param passwordList
      */
@@ -323,9 +323,9 @@ public class EnvelopeService extends BaseAccessibilityService {
 
     /**
      * 描述:回复消息,无延迟
-     * 作者:卜俊文
-     * 邮箱:344176791@qq.com
-     * 日期:2017/11/3 下午5:10
+     * 作者:曹海
+     * 邮箱:626704292@qq.com
+     * 日期:2019/11/3 下午5:10
      */
     public void replyMessage(String key) {
         replyMessage(key, 0);
@@ -333,9 +333,9 @@ public class EnvelopeService extends BaseAccessibilityService {
 
     /**
      * 描述:回复消息
-     * 作者:卜俊文
-     * 邮箱:344176791@qq.com
-     * 日期:2017/11/3 下午5:10
+     * 作者:曹海
+     * 邮箱:626704292@qq.com
+     * 日期:2019/11/3 下午5:10
      */
     public void replyMessage(String key, int time) {
 

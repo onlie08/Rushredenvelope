@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import demo.junwe.com.rushredenvelope.common.BaseAccessibilityService;
+import demo.junwe.com.rushredenvelope.utils.SPUtils;
 import demo.junwe.com.rushredenvelope.utils.SettingConfig;
 
 /**

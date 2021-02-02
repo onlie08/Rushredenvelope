@@ -13,11 +13,15 @@ import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import java.util.List;
+
+import demo.junwe.com.rushredenvelope.utils.SPUtils;
 
 public class InWxService extends AccessibilityService
 {
-
+    private String TAG = this.getClass().getSimpleName();
     /**
      * 微信几个页面的包名+地址。用于判断在哪个页面
      * LAUCHER-微信聊天界面
@@ -75,26 +79,44 @@ public class InWxService extends AccessibilityService
                     }
                 }
                 break;
-            //界面跳转的监听
-            case AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED:
+             case AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED:
                 String className = null;
                 if (event.getClassName() != null)
                 {
                     className = event.getClassName().toString();
                 }
-
+//                performBackClick(1000);
                 break;
             case AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED:
-                AccessibilityNodeInfo rootNode = getRootInActiveWindow();
-                findRedPacket1(rootNode);
-                openRedPacket1(rootNode);
-                //开始找红包
-
+                boolean reEnable = (boolean)SPUtils.get(this,"openEnable",false);
+                if(reEnable){
+                    AccessibilityNodeInfo rootNode = getRootInActiveWindow();
+                    findRedPacket1(rootNode);
+                    openRedPacket1(rootNode);
+                    boolean back_enable = (boolean) SPUtils.get(this,"backEnable",false);
+                    if(back_enable){
+                        closeRedPacket(rootNode);
+                    }
+                }
                 break;
         }
 
+    }
 
-
+    /**
+     * 关闭红包页
+     */
+    private void closeRedPacket(AccessibilityNodeInfo rootNode) {
+        if (rootNode == null){
+            Log.e("caohai", "openRedPacket1为空");
+            return;
+        }
+        List<AccessibilityNodeInfo> list = rootNode.findAccessibilityNodeInfosByViewId("com.tencent.mm:id/eh");
+        for (AccessibilityNodeInfo n : list) {
+            if(n.isClickable()){
+                n.performAction(AccessibilityNodeInfo.ACTION_CLICK);
+            }
+        }
     }
 
     /**
@@ -106,7 +128,7 @@ public class InWxService extends AccessibilityService
             Log.e("caohai", "openRedPacket1为空");
             return;
         }
-        List<AccessibilityNodeInfo> list = rootNode.findAccessibilityNodeInfosByViewId("com.tencent.mm:id/dan");
+        List<AccessibilityNodeInfo> list = rootNode.findAccessibilityNodeInfosByViewId("com.tencent.mm:id/f4f");
         Log.e("caohai", "拆红包"+list.size());
         for (AccessibilityNodeInfo n : list) {
             if(n.isClickable()){
@@ -116,7 +138,7 @@ public class InWxService extends AccessibilityService
     }
 
     /**
-     * 开始打开红包
+     * 开始找红包
      */
     private void findRedPacket1(AccessibilityNodeInfo rootNode)
     {
@@ -124,9 +146,9 @@ public class InWxService extends AccessibilityService
             Log.e("caohai", "findRedPacket1");
             return;
         }
-        List<AccessibilityNodeInfo> aul = rootNode.findAccessibilityNodeInfosByViewId("com.tencent.mm:id/aul"); //已领取
-        List<AccessibilityNodeInfo> aum = rootNode.findAccessibilityNodeInfosByViewId("com.tencent.mm:id/aum"); //微信红包
-        List<AccessibilityNodeInfo> bal = rootNode.findAccessibilityNodeInfosByViewId("com.tencent.mm:id/bal"); //微信聊天列表里包含新发的微信红包
+        List<AccessibilityNodeInfo> tt = rootNode.findAccessibilityNodeInfosByViewId("com.tencent.mm:id/tt"); //已领取
+        List<AccessibilityNodeInfo> aum = rootNode.findAccessibilityNodeInfosByViewId("com.tencent.mm:id/u5"); //微信红包
+        List<AccessibilityNodeInfo> bal = rootNode.findAccessibilityNodeInfosByViewId("com.tencent.mm:id/e7t"); //微信聊天列表里包含新发的微信红包
         if(!bal.isEmpty()){
             for(AccessibilityNodeInfo n : bal){
                 if(n.getText().toString().contains("[微信红包]")){
@@ -143,11 +165,28 @@ public class InWxService extends AccessibilityService
                 }
             }
         }
-        Log.e("caohai", "找红包 已领取："+aul.size() + "微信红包："+aum.size());
+        if(!aum.isEmpty()){
+            for(int i= aum.size()-1;i>=0;i--){
+                if(aum.get(i).getText().toString().contains("[微信红包]")){
+                    AccessibilityNodeInfo parent = aum.get(i).getParent();
+                    while (parent != null)
+                    {
+                        if (parent.isClickable())
+                        {
+                            parent.performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                            break;
+                        }
+                        parent = parent.getParent();
+                    }
+                }
+            }
+        }
+        Log.d(TAG,"aum.size():"+aum.size());
+        Log.e("caohai", "找红包 已领取："+tt.size() + "微信红包："+aum.size());
         if(aum.isEmpty()){
             return;
         }
-        if(aul.size() == aum.size()){
+        if(tt.size() == aum.size()){
             return;
         }
         AccessibilityNodeInfo parent = aum.get(aum.size()-1).getParent();
@@ -251,5 +290,13 @@ public class InWxService extends AccessibilityService
         keyguardLock.disableKeyguard();
     }
 
+    public void performBackClick(int time) {
+        try {
+            Thread.sleep(time);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        performGlobalAction(GLOBAL_ACTION_BACK);
+    }
 }
 

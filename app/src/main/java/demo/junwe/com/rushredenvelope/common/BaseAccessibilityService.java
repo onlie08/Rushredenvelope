@@ -181,9 +181,9 @@ public class BaseAccessibilityService extends AccessibilityService {
 
     /**
      * 描述:粘贴文本
-     * 作者:卜俊文
-     * 邮箱:344176791@qq.com
-     * 日期:2017/11/1 下午4:18
+     * 作者:曹海
+     * 邮箱:626704292@qq.com
+     * 日期:2019/11/1 下午4:18
      */
     public void pastaText(AccessibilityNodeInfo nodeInfo,Context context, String key) {
         //android>21 = 5.0时可以用ACTION_SET_TEXT

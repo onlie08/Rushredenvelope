@@ -68,6 +68,34 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal" />
 
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textSize="16sp"
+            android:visibility="gone"
+            android:textColor="#ffffff"
+            android:text="送给娜娜的专属抢红包神器" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textSize="16sp"
+            android:textColor="#ffffff"
+            android:visibility="gone"
+            android:text="爱你哟" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textSize="16sp"
+            android:textColor="#ffffff"
+            android:visibility="gone"
+            android:text="爱你爱你爱你么么哒(づ￣ 3￣)づ" />
+
     </LinearLayout>
 
 </LinearLayout>

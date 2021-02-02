@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import demo.junwe.com.rushredenvelope.R;
 import demo.junwe.com.rushredenvelope.common.BaseAccessibilityService;
+import demo.junwe.com.rushredenvelope.utils.SPUtils;
 import demo.junwe.com.rushredenvelope.utils.SettingConfig;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -56,7 +57,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mFrameAnim = (AnimationDrawable) getResources().getDrawable(R.drawable.animation_list);
         mActionEnable.setBackgroundDrawable(mFrameAnim);
         //根据当前服务的状态以及是否开启的状态来进行初始化
-        if (isServiceRunning() && isRedEnvelopeEnable()) {
+        boolean reEnable = (boolean) SPUtils.get(this,"openEnable",false);
+
+        if (isServiceRunning() && reEnable) {
             enableRedEnvelope(true);
         } else {
             enableRedEnvelope(false);
@@ -86,9 +89,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     /**
      * 描述:验证开关
-     * 作者:卜俊文
-     * 邮箱:344176791@qq.com
-     * 日期:2017/11/3 下午2:46
+     * 作者:曹海
+     * 邮箱:626704292@qq.com
+     * 日期:2019/11/3 下午2:46
      */
     public void checkAction() {
         if (!isServiceRunning()) {
@@ -99,22 +102,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             isJumpSetting = true;
         } else {
             //服务有运行，但是还要判断下，现在抢红包是开的还是关的
-            if (isRedEnvelopeEnable()) {
-                //开启状态，设置成关闭状态
+            boolean reEnable = (boolean) SPUtils.get(this,"openEnable",false);
+            if(reEnable){
                 enableRedEnvelope(false);
-            } else {
-                //设置红包为开
+                SPUtils.put(this,"openEnable",false);
+            }else {
                 enableRedEnvelope(true);
                 Toast.makeText(MainActivity.this, "已经开启抢红包，等待红包来到！", Toast.LENGTH_SHORT).show();
+                SPUtils.put(this,"openEnable",true);
             }
+//            if (isRedEnvelopeEnable()) {
+//                //开启状态，设置成关闭状态
+//                enableRedEnvelope(false);
+//            } else {
+//                //设置红包为开
+//                enableRedEnvelope(true);
+//                Toast.makeText(MainActivity.this, "已经开启抢红包，等待红包来到！", Toast.LENGTH_SHORT).show();
+//            }
         }
     }
 
     /**
      * 描述:是否正在运行
-     * 作者:卜俊文
-     * 邮箱:344176791@qq.com
-     * 日期:2017/11/1 下午2:04
+     * 作者:曹海
+     * 邮箱:626704292@qq.com
+     * 日期:2019/11/1 下午2:04
      */
     public boolean isServiceRunning() {
         return BaseAccessibilityService.getInstance().checkAccessibilityEnabled(serviceName);
@@ -122,9 +134,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     /**
      * 描述:红包开关是否打开
-     * 作者:卜俊文
-     * 邮箱:344176791@qq.com
-     * 日期:2017/11/3 下午2:37
+     * 作者:曹海
+     * 邮箱:626704292@qq.com
+     * 日期:2019/11/3 下午2:37
      */
     public boolean isRedEnvelopeEnable() {
         return SettingConfig.getInstance().getReEnable();
@@ -153,9 +165,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     /**
      * 描述:开关抢红包
-     * 作者:卜俊文
-     * 邮箱:344176791@qq.com
-     * 日期:2017/11/3 下午2:42
+     * 作者:曹海
+     * 邮箱:626704292@qq.com
+     * 日期:2019/11/3 下午2:42
      */
     public void enableRedEnvelope(boolean enable) {
         if (!enable && !isServiceRunning()) {

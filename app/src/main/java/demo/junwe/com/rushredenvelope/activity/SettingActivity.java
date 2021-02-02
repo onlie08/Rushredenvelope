@@ -14,6 +14,7 @@ import com.mixiaoxiao.smoothcompoundbutton.SmoothCompoundButton;
 import com.mixiaoxiao.smoothcompoundbutton.SmoothSwitch;
 
 import demo.junwe.com.rushredenvelope.R;
+import demo.junwe.com.rushredenvelope.utils.SPUtils;
 import demo.junwe.com.rushredenvelope.utils.SettingConfig;
 
 /**
@@ -25,6 +26,7 @@ public class SettingActivity extends AppCompatActivity implements SmoothCompound
 
     private SmoothSwitch mReEnable;
     private SmoothSwitch mMusicEnable;
+    private SmoothSwitch setting_back_enable;
     private LinearLayout mReplyMessage;
 
     @Override
@@ -40,19 +42,26 @@ public class SettingActivity extends AppCompatActivity implements SmoothCompound
         mReEnable = (SmoothSwitch) findViewById(R.id.setting_re_enable);
         mMusicEnable = (SmoothSwitch) findViewById(R.id.setting_music_enable);
         mReplyMessage = (LinearLayout) findViewById(R.id.setting_reply_message);
+        setting_back_enable = (SmoothSwitch) findViewById(R.id.setting_back_enable);
 
         //初始化开关
-        boolean reEnable = SettingConfig.getInstance().getReEnable();
+        boolean reEnable = (boolean)SPUtils.get(this,"openEnable",false);
         boolean reMusicEnable = SettingConfig.getInstance().getReMusicEnable();
+        boolean back_enable = (boolean)SPUtils.get(this,"backEnable",false);
+        //初始化开关
+//        boolean reEnable = SettingConfig.getInstance().getReEnable();
+//        boolean reMusicEnable = SettingConfig.getInstance().getReMusicEnable();
 
         mReEnable.setChecked(reEnable);
         mMusicEnable.setChecked(reMusicEnable);
+        setting_back_enable.setChecked(back_enable);
 
     }
 
     private void initListener() {
         mReEnable.setOnCheckedChangeListener(this);
         mMusicEnable.setOnCheckedChangeListener(this);
+        setting_back_enable.setOnCheckedChangeListener(this);
         mReplyMessage.setOnClickListener(this);
     }
 
@@ -61,11 +70,14 @@ public class SettingActivity extends AppCompatActivity implements SmoothCompound
         switch (smoothCompoundButton.getId()) {
             case R.id.setting_re_enable:
                 //抢红包开关变化
-                SettingConfig.getInstance().setReEnable(check);
+                SPUtils.put(this,"openEnable",check);
                 break;
             case R.id.setting_music_enable:
                 //抢红包音乐开关变化
                 SettingConfig.getInstance().setReMusicEnable(check);
+                break;
+            case R.id.setting_back_enable:
+                SPUtils.put(this,"backEnable",check);
                 break;
         }
     }

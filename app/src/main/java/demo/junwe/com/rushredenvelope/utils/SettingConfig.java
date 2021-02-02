@@ -12,9 +12,9 @@ import java.util.Set;
 
 /**
  * 描述:设置配置类
- * 作者:卜俊文
- * 邮箱:344176791@qq.com
- * 日期:2017/11/3 下午1:43
+ * 作者:曹海
+ * 邮箱:626704292@qq.com
+ * 日期:2019/11/3 下午1:43
  */
 public class SettingConfig {
 
@@ -57,9 +57,9 @@ public class SettingConfig {
 
     /**
      * 描述:设置抢红包开关
-     * 作者:卜俊文
-     * 邮箱:344176791@qq.com
-     * 日期:2017/11/3 下午1:51
+     * 作者:曹海
+     * 邮箱:626704292@qq.com
+     * 日期:2019/11/3 下午1:51
      */
     public void setReEnable(boolean enable) {
         sharedPreferences.edit().putBoolean(SETTING_RE_Enable, enable).commit();
@@ -71,9 +71,9 @@ public class SettingConfig {
 
     /**
      * 描述:设置声音开关
-     * 作者:卜俊文
-     * 邮箱:344176791@qq.com
-     * 日期:2017/11/3 下午1:51
+     * 作者:曹海
+     * 邮箱:626704292@qq.com
+     * 日期:2019/11/3 下午1:51
      */
     public void setReMusicEnable(boolean enable) {
         sharedPreferences.edit().putBoolean(SETTING_RE_MUSIC_ENABLE, enable).commit();
@@ -85,9 +85,9 @@ public class SettingConfig {
 
     /**
      * 描述:设置回复信息
-     * 作者:卜俊文
-     * 邮箱:344176791@qq.com
-     * 日期:2017/11/3 下午1:51
+     * 作者:曹海
+     * 邮箱:626704292@qq.com
+     * 日期:2019/11/3 下午1:51
      */
     public void setReReplyMessage(String message) {
         sharedPreferences.edit().putString(SETTING_RE_REPLY_MESSAGE, message).commit();
@@ -99,9 +99,9 @@ public class SettingConfig {
 
     /**
      * 描述:设置屏蔽消息名字
-     * 作者:卜俊文
-     * 邮箱:344176791@qq.com
-     * 日期:2017/11/3 下午1:51
+     * 作者:曹海
+     * 邮箱:626704292@qq.com
+     * 日期:2019/11/3 下午1:51
      */
     public void setReMarkName(String message) {
         Set<String> temp = sharedPreferences.getStringSet(SETTING_RE_MASK_NAME, null);
@@ -118,9 +118,9 @@ public class SettingConfig {
 
     /**
      * 描述:删除屏蔽的文字
-     * 作者:卜俊文
-     * 邮箱:344176791@qq.com
-     * 日期:2017/11/3 下午2:13
+     * 作者:曹海
+     * 邮箱:626704292@qq.com
+     * 日期:2019/11/3 下午2:13
      */
     public void removeReMarkName(String message) {
         Set<String> temp = sharedPreferences.getStringSet(SETTING_RE_MASK_NAME, null);
